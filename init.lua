@@ -912,12 +912,7 @@ require('lazy').setup({
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
 
-      -- Add/delete/replace surroundings (brackets, quotes, etc.)
-      --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-      -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
-      require('mini.surround').setup()
+      -- Surround functionality moved to nvim-surround (more powerful)
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
@@ -936,6 +931,35 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+    end,
+  },
+  {
+    
+      "sphamba/smear-cursor.nvim",
+      opts = {
+        -- 加快涂抹速度（让动画更快）
+        stiffness = 1,                    -- 光标移动的刚度系数
+        trailing_stiffness = 0.5,           -- 拖尾的刚度系数
+        distance_stop_animating = 0.5,      -- 停止动画的最小距离
+        
+        -- 平滑光标无涂抹效果
+        -- stiffness = 0.5,
+        -- trailing_stiffness = 0.49,
+        -- never_draw_over_target = false,
+        
+        -- 透明背景下的配置
+        -- transparent_bg_fallback_color = "#303030",
+      },
+  },
+  { -- Powerful surround plugin
+    'kylechui/nvim-surround',
+    version = '*',
+    event = 'VeryLazy',
+    config = function()
+      require('nvim-surround').setup({
+        -- Configuration options here
+        -- See :help nvim-surround.configuration
+      })
     end,
   },
   { -- Highlight, edit, and navigate code
