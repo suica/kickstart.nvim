@@ -835,7 +835,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'default',
+        preset = 'super-tab',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -887,14 +887,22 @@ require('lazy').setup({
       ---@diagnostic disable-next-line: missing-fields
       require('tokyonight').setup {
         styles = {
-          comments = { italic = false }, -- Disable italics in comments
+          comments = { italic = true }, -- Disable italics in comments
         },
       }
 
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-storm'
+    end,
+  },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    config = function()
+      vim.cmd [[colorscheme catppuccin-mocha]]
     end,
   },
 
@@ -934,33 +942,22 @@ require('lazy').setup({
     end,
   },
   {
-    
-      "sphamba/smear-cursor.nvim",
-      opts = {
-        -- 加快涂抹速度（让动画更快）
-        stiffness = 1,                    -- 光标移动的刚度系数
-        trailing_stiffness = 0.5,           -- 拖尾的刚度系数
-        distance_stop_animating = 0.5,      -- 停止动画的最小距离
-        
-        -- 平滑光标无涂抹效果
-        -- stiffness = 0.5,
-        -- trailing_stiffness = 0.49,
-        -- never_draw_over_target = false,
-        
-        -- 透明背景下的配置
-        -- transparent_bg_fallback_color = "#303030",
-      },
-  },
-  { -- Powerful surround plugin
-    'kylechui/nvim-surround',
-    version = '*',
-    event = 'VeryLazy',
+    'chentoast/marks.nvim',
     config = function()
-      require('nvim-surround').setup({
-        -- Configuration options here
-        -- See :help nvim-surround.configuration
-      })
+      require('marks').setup {
+        -- 在 sign 列显示标记符号
+        sign_priority = { lower = 10, upper = 15, builtin = 8, bookmark = 20 },
+        -- 显示虚拟文字（可选）
+        bookmark_0 = {
+          sign = '⚑',
+          virt_text = true,
+        },
+      }
     end,
+  },
+  {
+    'chentoast/marks.nvim',
+    opts = {},
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -1000,9 +997,9 @@ require('lazy').setup({
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -1038,3 +1035,19 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+local o = vim.opt
+
+-- 缩进设置
+o.tabstop = 2
+o.shiftwidth = 2
+o.softtabstop = 2
+o.expandtab = true
+o.smartindent = true
+o.autoindent = true -- 复制上一行缩进
+
+-- 其他常用编辑器行为
+o.number = true -- 显示行号
+o.relativenumber = true -- 相对行号
+o.wrap = false -- 不自动折行
+o.cursorline = true -- 高亮当前行
