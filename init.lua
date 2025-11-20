@@ -104,6 +104,16 @@ vim.o.number = true
 --  Experiment for yourself to see if you like it!
 vim.o.relativenumber = true
 
+-- Set indentation to 2 spaces
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
+vim.o.expandtab = true
+vim.o.smartindent = true
+
+-- Disable line wrapping
+vim.o.wrap = false
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 
@@ -955,10 +965,6 @@ require('lazy').setup({
       }
     end,
   },
-  {
-    'chentoast/marks.nvim',
-    opts = {},
-  },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -1035,19 +1041,3 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
-local o = vim.opt
-
--- 缩进设置
-o.tabstop = 2
-o.shiftwidth = 2
-o.softtabstop = 2
-o.expandtab = true
-o.smartindent = true
-o.autoindent = true -- 复制上一行缩进
-
--- 其他常用编辑器行为
-o.number = true -- 显示行号
-o.relativenumber = true -- 相对行号
-o.wrap = false -- 不自动折行
-o.cursorline = true -- 高亮当前行
