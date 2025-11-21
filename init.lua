@@ -358,6 +358,16 @@ require('lazy').setup({
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+
+        -- 完整的 buffer 分组配置
+        { '<leader>b', group = '[B]uffer' },
+        { '<leader>bb', '<cmd>Telescope buffers<CR>', desc = 'Buffers List' },
+        { '<leader>bn', '<cmd>bnext<CR>', desc = 'Next Buffer' },
+        { '<leader>bp', '<cmd>bprevious<CR>', desc = 'Previous Buffer' },
+        { '<leader>bd', '<cmd>bdelete<CR>', desc = 'Delete Buffer' },
+        { '<leader>bc', '<cmd>enew<CR>', desc = 'Create New' },
+        { '<leader>bs', '<cmd>write<CR>', desc = 'Save' },
+        { '<leader>bS', '<cmd>wall<CR>', desc = 'Save All' },
       },
     },
   },
