@@ -37,6 +37,35 @@ return {
         end,
         desc = 'Flash',
       },
+      -- Treesitter 节点跳转（核心功能）
+      {
+        'S',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').treesitter()
+        end,
+        desc = 'Flash Treesitter',
+      },
+
+      -- Treesitter 搜索
+      {
+        'R',
+        mode = { 'o', 'x' },
+        function()
+          require('flash').treesitter_search()
+        end,
+        desc = 'Treesitter Search',
+      },
+
+      -- 远程操作
+      {
+        'r',
+        mode = 'o',
+        function()
+          require('flash').remote()
+        end,
+        desc = 'Remote Flash',
+      },
     },
   },
   {
