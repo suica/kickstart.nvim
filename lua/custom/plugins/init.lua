@@ -56,16 +56,6 @@ return {
         end,
         desc = 'Treesitter Search',
       },
-
-      -- 远程操作
-      {
-        'r',
-        mode = 'o',
-        function()
-          require('flash').remote()
-        end,
-        desc = 'Remote Flash',
-      },
     },
   },
   {
