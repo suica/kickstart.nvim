@@ -75,4 +75,22 @@ return {
       }
     end,
   },
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    -- 当执行 :ToggleTerm 命令时加载
+    cmd = 'ToggleTerm',
+    -- 当按下快捷键时加载
+    keys = {
+      -- 主终端：浮动窗口
+      { '<C-t>', '<cmd>ToggleTerm direction=float<cr>', desc = 'Toggle float terminal', mode = { 'n', 't' } },
+    },
+    config = function()
+      require('toggleterm').setup {
+        size = 20,
+        direction = 'float',
+        float_opts = { border = 'rounded' },
+      }
+    end,
+  },
 }
