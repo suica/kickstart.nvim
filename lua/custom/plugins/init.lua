@@ -4,22 +4,49 @@
 -- See the kickstart.nvim README for more information
 return {
   {
-    'mason-org/mason-lspconfig.nvim',
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    lazy = true,
+    ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
     opts = {
-      vtsls = { -- ✅ 必须是 vtsls，不是 ts_ls
-        settings = {
-          typescript = {
-            inlayHints = {
-              parameterNames = { enabled = 'literals' },
-              parameterTypes = { enabled = true },
-              variableTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              enumMemberValues = { enabled = true },
-            },
-          },
+      settings = {
+        tsserver_file_preferences = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+          includeInlayFunctionParameterTypeHints = true,
+          includeInlayVariableTypeHints = true,
+          includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+          includeInlayPropertyDeclarationTypeHints = true,
+          includeInlayFunctionLikeReturnTypeHints = true,
+          includeInlayEnumMemberValueHints = true,
         },
       },
     },
+  },
+  {
+    'folke/flash.nvim',
+    event = 'VeryLazy',
+    ---@type Flash.Config
+    opts = {},
+    keys = {
+      {
+        's',
+        mode = { 'n', 'x', 'o' },
+        function()
+          require('flash').jump()
+        end,
+        desc = 'Flash',
+      },
+    },
+  },
+  {
+    'nvimdev/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require('dashboard').setup {
+        -- config
+      }
+    end,
+    dependencies = { { 'nvim-tree/nvim-web-devicons' } },
   },
 }
